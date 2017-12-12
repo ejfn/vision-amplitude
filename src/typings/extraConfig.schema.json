@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "title": "ExtraConfig",
+  "description": "extra section in app.json",
+  "definitions": {
+  },
+  "type": "object",
+  "properties": {
+    "amplitudeApiKey": {
+      "type": "string"
+    },
+    "amplitudeApiSecret": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "amplitudeApiKey",
+    "amplitudeApiSecret"
+  ],
+  "additionalProperties": false
+}

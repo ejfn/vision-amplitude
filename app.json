@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "vision-amplitude",
+    "description": "Amplitude charts for vision",
+    "slug": "vision-amplitude",
+    "privacy": "public",
+    "sdkVersion": "23.0.0",
+    "version": "1.0.0",
+    "orientation": "default",
+    "primaryColor": "#cccccc",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "packagerOpts": {
+      "sourceExts": [
+        "ts",
+        "tsx"
+      ],
+      "transformer": "node_modules/react-native-typescript-transformer/index.js"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "extra": {
+      "amplitudeApiKey": "",
+      "amplitudeApiSecret": ""
+    }
+  }
+}
