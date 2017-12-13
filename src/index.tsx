@@ -1,21 +1,68 @@
+import { AppLoading } from 'expo';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
-export default class App extends React.PureComponent {
+import { updateChartList } from './actions/charts';
+import { Main } from './components/Main';
+import { CHARTS_DEFINITION } from './config';
+import * as reducers from './reducers';
+import { INITIAL_STATE } from './reducers/initialState';
+import { rootSaga } from './sagas';
+
+const sagaMiddleware = createSagaMiddleware();
+const rootReducer = combineReducers(reducers);
+
+const store = createStore(
+  rootReducer,
+  INITIAL_STATE,
+  applyMiddleware(sagaMiddleware)
+);
+
+sagaMiddleware.run(rootSaga);
+
+// load charts
+store.dispatch(updateChartList(CHARTS_DEFINITION));
+
+interface Props { }
+
+interface State {
+  isReady: boolean;
+}
+export class App extends React.PureComponent<Props, State> {
+
+  public state: State = {
+    isReady: false
+  };
   public render(): JSX.Element {
+    if (!this.state.isReady) {
+      return (
+        <AppLoading
+          startAsync={this.cacheResourcesAsync}
+          onFinish={this.finishLoading}
+          onError={console.warn}
+        />
+      );
+    }
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      <Provider store={store}>
+        <Main />
+      </Provider>
     );
   }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+  private finishLoading = () => {
+    this.setState((state: State) => {
+      return {
+        ...state,
+        isReady: true
+      };
+    });
   }
-});
+
+  private cacheResourcesAsync = async () => {
+    // tslint:disable:no-require-imports no-floating-promises
+
+    // tslint:enable:no-require-imports no-floating-promises
+  }
+}
