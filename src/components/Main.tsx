@@ -1,18 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { connect, MapStateToProps } from 'react-redux';
 
 import { invalidateQueryDataList, InvalidateQueryDataListPayload } from '../actions/queryData';
-import { QueryData } from '../api/types';
 import { selectDisplayChartList } from '../selectors/displayChart';
 import { selectQueryIds } from '../selectors/query';
 import { AppState, Chart, QueryPeriod, QueryState } from '../store';
+import { BarChart, BarChartDataSet } from './BarChart';
+import { LineChart, LineChartDataSet } from './LineChart';
+import { PieChart, PieChartDataSet } from './PieChart';
 
 interface OwnProps { }
 
+export type DataSet = LineChartDataSet | BarChartDataSet | PieChartDataSet;
+
 export interface DisplayChart {
   chart: Chart;
-  chartData: QueryData | undefined;
+  dataSet: DataSet | undefined;
   state: QueryState | undefined;
 }
 
@@ -50,11 +54,28 @@ export class InnerMain extends React.PureComponent<Props, State> {
     this.props.invalidateQueryDataList(payload);
   }
 
+  private renderChart = (chart: DisplayChart, i: number): JSX.Element => {
+    switch (chart.chart.chartType) {
+      case 'Line':
+        return <LineChart key={i} dataSet={chart.dataSet as LineChartDataSet} />;
+      case 'Bar':
+        return <BarChart key={i} dataSet={chart.dataSet as BarChartDataSet} />;
+      case 'Pie':
+        return <PieChart key={i} dataSet={chart.dataSet as PieChartDataSet} />;
+      default:
+        return <View />;
+    }
+
+  }
+
   public render(): JSX.Element {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        {
+          this.props.charts.map((c: DisplayChart, i: number) => this.renderChart(c, i))
+        }
         <Text>{JSON.stringify(this.props.charts)}</Text>
-      </View>
+      </SafeAreaView>
     );
   }
 }

@@ -28,6 +28,7 @@ export interface Query {
 }
 
 export interface QueryData {
+  queryType: string;
   wasCached: boolean;
   transformationIds: Array<string>;
   timeComputed: number;

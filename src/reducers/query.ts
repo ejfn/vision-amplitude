@@ -20,10 +20,10 @@ export function queryReducer(
     case actions.updateQueryList.type:
       {
         return action.payload.reduce(
-          (p: ReduxIndex<Query>, c: Query) => {
+          (p: ReduxIndex<Query>, q: Query) => {
             return {
               ...p,
-              [c.id]: c
+              [q.id]: q
             };
           },
           state);

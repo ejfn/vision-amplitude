@@ -1,6 +1,8 @@
 import { Constants } from 'expo';
 
-import { EventsSegmentationQuery } from './api/eventsSegmentation';
+import {
+  EventsSegmentationQuery
+} from './api/eventsSegmentation';
 import { Query } from './api/types';
 import { Chart } from './store';
 import { ExtraConfig } from './typings/extraConfig';

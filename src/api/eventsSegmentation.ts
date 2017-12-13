@@ -10,8 +10,9 @@ import {
   QueryData
 } from './types';
 
+export const EVENTS_SEGMENTATION_QUERY_TYPE: string = 'EventsSegmentation';
+
 export interface EventsSegmentationQuery extends Query {
-  queryType: 'EventsSegmentation';
   e: EventQuery;
   e2?: EventQuery;
   m: MetricsOption;
@@ -26,8 +27,12 @@ export interface EventsSegmentationQueryData extends QueryData {
   };
 }
 
-export function isEventsSegmentation(o: Query | undefined): o is EventsSegmentationQuery {
-  return o != null && typeof o === 'object' && o.queryType === 'EventsSegmentation';
+export function isEventsSegmentationQuery(o: Query | undefined): o is EventsSegmentationQuery {
+  return o != null && typeof o === 'object' && o.queryType === EVENTS_SEGMENTATION_QUERY_TYPE;
+}
+
+export function isEventsSegmentationQueryData(o: QueryData | undefined): o is EventsSegmentationQueryData {
+  return o != null && typeof o === 'object' && o.queryType === EVENTS_SEGMENTATION_QUERY_TYPE;
 }
 
 export async function getEventsSegmentation(

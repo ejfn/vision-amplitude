@@ -1,8 +1,10 @@
 import { createSelector } from 'reselect';
 
+import { isEventsSegmentationQueryData } from '../api/eventsSegmentation';
 import { QueryData } from '../api/types';
-import { DisplayChart } from '../components/Main';
-import { AppState, Chart, QueryPeriod, QueryState, ReduxIndex } from '../store';
+import { DataSet, DisplayChart } from '../components/Main';
+import { AppState, Chart, ChartType, QueryPeriod, QueryState, ReduxIndex } from '../store';
+import { DataObject } from '../typings/victory';
 
 export const selectDisplayChartList = createSelector(
   (state: AppState) => state.charts,
@@ -13,16 +15,52 @@ export const selectDisplayChartList = createSelector(
     queryData: ReduxIndex<QueryData>,
     queryState: ReduxIndex<QueryState>
   ): Array<DisplayChart> => {
-
     return charts.map((chart: Chart) => {
-      // transform to Victory data
-      const chartData = queryData[chart.queryId];
+      const dataSet = transformChartData(queryData[chart.queryId], chart.chartType);
       const state = queryState[chart.queryId];
       return {
         chart,
-        chartData,
+        dataSet,
         state
       };
     });
   }
 );
+
+function transformChartData(queryData: QueryData | undefined, chartType: ChartType): DataSet | undefined {
+  if (isEventsSegmentationQueryData(queryData)) {
+    const data = queryData.data;
+    const labels = data.seriesLabels.map((i: Array<string>) => i[1]);
+    switch (chartType) {
+      case 'Line':
+      case 'Bar':
+        {
+          const chartData: Record<string, Array<DataObject>> = {};
+          return labels.reduce(
+            (p: Record<string, Array<DataObject>>, c: string, i: number) => {
+              p[c] = data.xValues.map((x: string, j: number) => {
+                const y = data.series[i][j];
+                return { x, y };
+              });
+              return p;
+            },
+            chartData);
+        }
+      case 'Pie':
+        {
+          const chartData: Array<DataObject> = [];
+          labels.reduce(
+            (p: Array<DataObject>, x: string, i: number) => {
+              const y = data.seriesCollapsed[i].value;
+              p.push({ x, y });
+              return p;
+            },
+            chartData);
+          return chartData;
+        }
+      default:
+        return undefined;
+    }
+  }
+  return undefined;
+}
