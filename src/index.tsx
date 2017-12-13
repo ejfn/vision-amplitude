@@ -4,9 +4,10 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
-import { updateChartList } from './actions/charts';
+import { updateChartList } from './actions/chart';
+import { updateQueryList } from './actions/query';
 import { Main } from './components/Main';
-import { CHARTS_DEFINITION } from './config';
+import { CHART_DEFINITIONS, QUERY_DEFINITIONS } from './config';
 import * as reducers from './reducers';
 import { INITIAL_STATE } from './reducers/initialState';
 import { rootSaga } from './sagas';
@@ -22,8 +23,9 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 
-// load charts
-store.dispatch(updateChartList(CHARTS_DEFINITION));
+// load queries and charts
+store.dispatch(updateQueryList(QUERY_DEFINITIONS));
+store.dispatch(updateChartList(CHART_DEFINITIONS));
 
 interface Props { }
 

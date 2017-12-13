@@ -4,20 +4,20 @@ import { EXTRA_CONFIG } from '../config';
 import { QueryPeriod } from '../store';
 import { encodeQueryData, resolveRangeByPeriod } from '../utils/index';
 import {
-  Chart,
-  ChartData,
   EventQuery,
-  MetricsOption
+  MetricsOption,
+  Query,
+  QueryData
 } from './types';
 
-export interface EventsSegmentationChart extends Chart {
-  chartType: 'EventsSegmentation';
+export interface EventsSegmentationQuery extends Query {
+  queryType: 'EventsSegmentation';
   e: EventQuery;
   e2?: EventQuery;
   m: MetricsOption;
 }
 
-export interface EventsSegmentationChartData extends ChartData {
+export interface EventsSegmentationQueryData extends QueryData {
   data: {
     series: Array<Array<number>>;
     seriesLabels: Array<Array<number | string>>;
@@ -26,14 +26,14 @@ export interface EventsSegmentationChartData extends ChartData {
   };
 }
 
-export function isEventsSegmentation(o: Chart | undefined): o is EventsSegmentationChart {
-  return o != null && typeof o === 'object' && o.chartType === 'EventsSegmentation';
+export function isEventsSegmentation(o: Query | undefined): o is EventsSegmentationQuery {
+  return o != null && typeof o === 'object' && o.queryType === 'EventsSegmentation';
 }
 
 export async function getEventsSegmentation(
-  chart: EventsSegmentationChart,
+  chart: EventsSegmentationQuery,
   period: QueryPeriod
-): Promise<EventsSegmentationChartData> {
+): Promise<EventsSegmentationQueryData> {
   const url: string = 'https://amplitude.com/api/2/events/segmentation';
   const { start, end, i } = resolveRangeByPeriod(period);
   const query: string = encodeQueryData({
@@ -61,5 +61,5 @@ export async function getEventsSegmentation(
     throw new Error(`Http Error: ${response.status} - ${response.statusText}`);
   }
 
-  return response.json() as Promise<EventsSegmentationChartData>;
+  return response.json() as Promise<EventsSegmentationQueryData>;
 }

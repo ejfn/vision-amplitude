@@ -22,12 +22,12 @@ export interface GroupBy {
   value: string;
 }
 
-export interface Chart {
+export interface Query {
   id: string;
-  chartType: string;
+  queryType: string;
 }
 
-export interface ChartData {
+export interface QueryData {
   wasCached: boolean;
   transformationIds: Array<string>;
   timeComputed: number;

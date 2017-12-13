@@ -1,26 +1,26 @@
-import * as actions from '../actions/charts';
-import { Chart } from '../api/types';
+import * as actions from '../actions/query';
+import { Query } from '../api/types';
 import { ReduxIndex } from '../store';
 import { INITIAL_STATE } from './initialState';
 
-export function chartsReducer(
-  state: ReduxIndex<Chart> = INITIAL_STATE.charts,
+export function queryReducer(
+  state: ReduxIndex<Query> = INITIAL_STATE.queries,
   action:
-    typeof actions.updateChartList.shape |
-    typeof actions.updateChart.shape
-): ReduxIndex<Chart> {
+    typeof actions.updateQueryList.shape |
+    typeof actions.updateQuery.shape
+): ReduxIndex<Query> {
   switch (action.type) {
-    case actions.updateChart.type:
+    case actions.updateQuery.type:
       {
         return {
           ...state,
           [action.payload.id]: action.payload
         };
       }
-    case actions.updateChartList.type:
+    case actions.updateQueryList.type:
       {
         return action.payload.reduce(
-          (p: ReduxIndex<Chart>, c: Chart) => {
+          (p: ReduxIndex<Query>, c: Query) => {
             return {
               ...p,
               [c.id]: c
