@@ -3,7 +3,7 @@
     "name": "vision-amplitude",
     "description": "Amplitude charts for vision",
     "slug": "vision-amplitude",
-    "privacy": "public",
+    "privacy": "unlisted",
     "sdkVersion": "23.0.0",
     "version": "1.0.0",
     "orientation": "portrait",

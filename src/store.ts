@@ -1,3 +1,4 @@
+import { ColorScalePropType } from 'victory-native';
 import { Query, QueryData } from './api/types';
 
 export interface AppState {
@@ -19,6 +20,7 @@ export interface Chart {
   title: string;
   queryId: string;
   chartType: ChartType;
+  colorScale: ColorScalePropType;
 }
 
 export interface QueryState {

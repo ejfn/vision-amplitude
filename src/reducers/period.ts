@@ -5,10 +5,10 @@ import { INITIAL_STATE } from './initialState';
 export function periodReducer(
   state: QueryPeriod = INITIAL_STATE.period,
   action:
-    typeof actions.updatePeriod.shape
+    typeof actions.updateQueryPeriod.shape
 ): QueryPeriod {
   switch (action.type) {
-    case actions.updatePeriod.type:
+    case actions.updateQueryPeriod.type:
       return action.payload;
     default:
       return state;

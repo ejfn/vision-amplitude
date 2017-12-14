@@ -29,11 +29,56 @@ const query1: EventsSegmentationQuery = {
   m: 'totals'
 };
 
-const chart1: Chart = {
-  title: 'Api Succeeded',
-  queryId: query1.id,
-  chartType: 'Line'
+const query2: EventsSegmentationQuery = {
+  id: 'd65b1ca4-3be9-46fb-ba69-8858ea8f13bc',
+  queryType: 'EventsSegmentation',
+  e: {
+    event_type: 'ce:Api Succeeded',
+    group_by: [
+      {
+        type: 'user',
+        value: 'country'
+      }
+    ]
+  },
+  m: 'totals'
 };
 
-export const QUERY_DEFINITIONS: Array<Query> = [query1];
-export const CHART_DEFINITIONS: Array<Chart> = [chart1];
+const chart1: Chart = {
+  title: 'By Type',
+  queryId: query1.id,
+  chartType: 'Line',
+  colorScale: 'heatmap'
+};
+
+const chart2: Chart = {
+  title: 'By Type',
+  queryId: query1.id,
+  chartType: 'Pie',
+  colorScale: 'heatmap'
+};
+
+// const chart3: Chart = {
+//   title: 'By Country',
+//   queryId: query2.id,
+//   chartType: 'Bar',
+//   colorScale: 'heatmap'
+// };
+
+const chart4: Chart = {
+  title: 'By Country',
+  queryId: query2.id,
+  chartType: 'Pie',
+  colorScale: 'heatmap'
+};
+
+export const QUERY_DEFINITIONS: Array<Query> = [
+  query1,
+  query2
+];
+export const CHART_DEFINITIONS: Array<Chart> = [
+  chart1,
+  chart2,
+  // chart3,
+  chart4
+];

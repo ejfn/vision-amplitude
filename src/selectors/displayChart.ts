@@ -4,7 +4,7 @@ import { isEventsSegmentationQueryData } from '../api/eventsSegmentation';
 import { QueryData } from '../api/types';
 import { DataSet, DisplayChart } from '../components/Main';
 import { AppState, Chart, ChartType, QueryPeriod, QueryState, ReduxIndex } from '../store';
-import { DataObject } from '../typings/victory';
+import { Pt } from '../typings/victory';
 
 export const selectDisplayChartList = createSelector(
   (state: AppState) => state.charts,
@@ -35,9 +35,9 @@ function transformChartData(queryData: QueryData | undefined, chartType: ChartTy
       case 'Line':
       case 'Bar':
         {
-          const chartData: Record<string, Array<DataObject>> = {};
+          const chartData: Record<string, Array<Pt>> = {};
           return labels.reduce(
-            (p: Record<string, Array<DataObject>>, c: string, i: number) => {
+            (p: Record<string, Array<Pt>>, c: string, i: number) => {
               p[c] = data.xValues.map((x: string, j: number) => {
                 const y = data.series[i][j];
                 return { x, y };
@@ -48,10 +48,10 @@ function transformChartData(queryData: QueryData | undefined, chartType: ChartTy
         }
       case 'Pie':
         {
-          const chartData: Array<DataObject> = [];
+          const chartData: Array<Pt> = [];
           labels.reduce(
-            (p: Array<DataObject>, x: string, i: number) => {
-              const y = data.seriesCollapsed[i].value;
+            (p: Array<Pt>, x: string, i: number) => {
+              const y = data.seriesCollapsed[i][0].value;
               p.push({ x, y });
               return p;
             },

@@ -10,13 +10,18 @@ import {
   isEventsSegmentationQuery
 } from '../api/eventsSegmentation';
 import { Query } from '../api/types';
-import { AppState } from '../store';
+import { AppState, QueryState } from '../store';
 
 function* invalidateQueryDataSaga(action: typeof actions.invalidateQueryData.shape): SagaIterator {
   const { period, queryId } = action.payload;
   const query: Query = yield select((s: AppState) => s.queries[queryId]);
-  yield put(queryStataActions.startQuery({ period, queryId }));
+  const currentQueryState: QueryState | undefined = yield select((s: AppState) => s.queryState[period][queryId]);
+  if (currentQueryState !== undefined && currentQueryState.isRequesting) {
+    // skip, it's requesting...
+    return;
+  }
   try {
+    yield put(queryStataActions.startQuery({ period, queryId }));
     if (isEventsSegmentationQuery(query)) {
       const queryData: EventsSegmentationQueryData = yield call(getEventsSegmentation, query, period);
       queryData.queryType = EVENTS_SEGMENTATION_QUERY_TYPE;
@@ -26,6 +31,8 @@ function* invalidateQueryDataSaga(action: typeof actions.invalidateQueryData.sha
         queryData
       }));
       yield put(queryStataActions.completeQuery({ period, queryId }));
+    } else {
+      throw new Error('Invalid query definition.');
     }
   } catch (e) {
     yield put(queryStataActions.completeQuery({ period, queryId, error: e.message }));

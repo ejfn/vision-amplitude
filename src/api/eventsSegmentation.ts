@@ -22,7 +22,7 @@ export interface EventsSegmentationQueryData extends QueryData {
   data: {
     series: Array<Array<number>>;
     seriesLabels: Array<Array<number | string>>;
-    seriesCollapsed: Array<{ setId: string; value: number }>;
+    seriesCollapsed: Array<Array<{ setId: string; value: number }>>;
     xValues: Array<string>;
   };
 }
