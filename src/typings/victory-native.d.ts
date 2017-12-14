@@ -12,4 +12,10 @@ declare module "victory-native" {
   }
   export class VictoryLegend extends React.Component<VictoryLegendProps, any> { }
 
+  export interface VictoryAxisProps extends victory.VictoryAxisProps {
+    fixLabelOverlap?: boolean;
+    colorScale?: ColorScalePropType;
+  }
+  export class VictoryAxis extends React.Component<VictoryAxisProps, any> { }
+
 }

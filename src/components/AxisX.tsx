@@ -9,6 +9,7 @@ import { LineChartDataSet } from './LineChart';
 
 export interface LegendProps {
   dataSet: LineChartDataSet | BarChartDataSet;
+  colorScale?: ColorScalePropType;
 }
 
 export class AxisX extends React.PureComponent<LegendProps> {
@@ -22,7 +23,7 @@ export class AxisX extends React.PureComponent<LegendProps> {
     }
     return (
       <VictoryAxis
-        offsetY={300}
+        colorScale={this.props.colorScale}
         tickValues={tickValues}
         tickFormat={tickFormat}
         fixLabelOverlap={true} />
