@@ -1,6 +1,6 @@
 import { Svg } from 'expo';
 import React from 'react';
-import { Dimensions, View } from 'react-native';
+import { Dimensions } from 'react-native';
 import {
   ColorScalePropType,
   DomainPropType,
@@ -23,10 +23,7 @@ export interface LineChartProps {
 
 export class LineChart extends React.PureComponent<LineChartProps> {
   public render(): JSX.Element {
-    const dataSet: LineChartDataSet = this.props.dataSet;
-    if (dataSet === undefined) {
-      return <View />;
-    }
+    const dataSet: LineChartDataSet = this.props.dataSet || {};
     const labels: Array<string> = Object.keys(dataSet);
     let xLabels: Array<string> = [];
     const domain: DomainPropType = { y: [0, 1] };
