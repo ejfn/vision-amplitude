@@ -14,7 +14,7 @@ export interface ReduxIndex<T> {
 }
 
 export type QueryPeriod = '1W' | '2W' | '5W' | '13W' | '26W';
-export type ChartType = 'Line' | 'Bar' | 'Pie';
+export type ChartType = 'Line' | 'Pie';
 
 export interface Chart {
   title: string;

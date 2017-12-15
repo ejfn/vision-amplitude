@@ -14,13 +14,12 @@ import { invalidateQueryDataList, InvalidateQueryDataListPayload } from '../acti
 import { selectDisplayChartList } from '../selectors/displayChart';
 import { selectQueryIds } from '../selectors/query';
 import { AppState, Chart, QueryPeriod, QueryState } from '../store';
-import { BarChart, BarChartDataSet } from './BarChart';
 import { LineChart, LineChartDataSet } from './LineChart';
 import { PieChart, PieChartDataSet } from './PieChart';
 
 const { width } = Dimensions.get('window');
 
-export type DataSet = LineChartDataSet | BarChartDataSet | PieChartDataSet;
+export type DataSet = LineChartDataSet | PieChartDataSet;
 
 const PERIODS: Array<QueryPeriod> = ['1W', '2W', '5W', '13W', '26W'];
 
@@ -81,13 +80,6 @@ export class InnerMain extends React.PureComponent<Props, State> {
             colorScale={colorScale}
             dataSet={dataSet as LineChartDataSet}
           />
-        );
-      case 'Bar':
-        return (
-          <BarChart
-            key={i}
-            colorScale={colorScale}
-            dataSet={dataSet as BarChartDataSet} />
         );
       case 'Pie':
         return (

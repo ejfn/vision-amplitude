@@ -58,12 +58,12 @@ const chart2: Chart = {
   colorScale: 'heatmap'
 };
 
-// const chart3: Chart = {
-//   title: 'By Country',
-//   queryId: query2.id,
-//   chartType: 'Bar',
-//   colorScale: 'heatmap'
-// };
+const chart3: Chart = {
+  title: 'By Country',
+  queryId: query2.id,
+  chartType: 'Line',
+  colorScale: 'heatmap'
+};
 
 const chart4: Chart = {
   title: 'By Country',
@@ -79,6 +79,6 @@ export const QUERY_DEFINITIONS: Array<Query> = [
 export const CHART_DEFINITIONS: Array<Chart> = [
   chart1,
   chart2,
-  // chart3,
+  chart3,
   chart4
 ];

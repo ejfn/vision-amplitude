@@ -33,7 +33,6 @@ function transformChartData(queryData: QueryData | undefined, chartType: ChartTy
     const labels = data.seriesLabels.map((i: Array<string>) => i[1]);
     switch (chartType) {
       case 'Line':
-      case 'Bar':
         {
           const chartData: Record<string, Array<Pt>> = {};
           return labels.reduce(
