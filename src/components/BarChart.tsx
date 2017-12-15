@@ -6,7 +6,6 @@ import {
   VictoryStack,
   VictoryTheme
 } from 'victory-native';
-
 import { Pt } from '../typings/victory';
 import { Legend } from './Legend';
 

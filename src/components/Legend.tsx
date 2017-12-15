@@ -19,6 +19,7 @@ export class Legend extends React.PureComponent<LegendProps> {
       <VictoryLegend
         colorScale={this.props.colorScale}
         orientation={'horizontal'}
+        standalone={false}
         x={80}
         y={10}
         data={legends}
