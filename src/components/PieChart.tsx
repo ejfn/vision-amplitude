@@ -1,6 +1,6 @@
 import { Svg } from 'expo';
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import {
   ColorScalePropType,
   VictoryLegend,
@@ -21,23 +21,27 @@ export interface PieChartProps {
 export class PieChart extends React.PureComponent<PieChartProps> {
 
   public render(): JSX.Element {
-    const dataSet: Array<Pt> = this.props.dataSet || [{ x: '', y: 1 }];
+    const dataSet: Array<Pt> = this.props.dataSet;
+    if (dataSet === undefined) {
+      return <View />;
+    }
     const sum = dataSet.reduce((p: number, c: Pt) => p + c.y, 0);
     const labels = (o: Pt): string => `${Math.round(100 * o.y / sum)}%`;
     const legends = dataSet.slice(0, 6).map((p: Pt) => ({ name: `${p.x}: ${p.y}` }));
     const innerRadius = (width * 0.6 / 2 - 20) / 2;
     return (
-
       <Svg>
-        <VictoryLegend
-          theme={VictoryTheme.material}
-          colorScale={this.props.colorScale}
-          orientation={'vertical'}
-          x={20}
-          y={20}
-          data={legends}
-          standalone={false}
-        />
+        {dataSet &&
+          <VictoryLegend
+            theme={VictoryTheme.material}
+            colorScale={this.props.colorScale}
+            orientation={'vertical'}
+            x={20}
+            y={20}
+            data={legends}
+            standalone={false}
+          />
+        }
         <VictoryPie
           theme={VictoryTheme.material}
           colorScale={this.props.colorScale}
@@ -51,7 +55,6 @@ export class PieChart extends React.PureComponent<PieChartProps> {
           // tslint:disable-next-line:react-this-binding-issue
           labels={labels}
         />
-
       </Svg>
     );
   }
