@@ -35,7 +35,7 @@ export function resolveRangeByPeriod(period: QueryPeriod): { start: string; end:
       return {
         start: moment.utc().add(-26, 'weeks').format('YYYYMMDD'),
         end: moment.utc().format('YYYYMMDD'),
-        i: 30
+        i: 7
       };
     case '13W':
       return {
@@ -47,7 +47,7 @@ export function resolveRangeByPeriod(period: QueryPeriod): { start: string; end:
       return {
         start: moment.utc().add(-5, 'weeks').format('YYYYMMDD'),
         end: moment.utc().format('YYYYMMDD'),
-        i: 7
+        i: 1
       };
     case '2W':
       return {

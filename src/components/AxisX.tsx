@@ -18,13 +18,10 @@ export interface LegendProps {
 export class AxisX extends React.PureComponent<LegendProps> {
 
   private formatLabel = (date: string, totalDays: number): string => {
-    if (totalDays < 30) {
+    if (totalDays < 42) {
       return moment(date).format('D');
     }
-    if (totalDays < 90) {
-      return moment(date).format('D-MMM');
-    }
-    return moment(date).format('MMM');
+    return moment(date).format('D-MMM');
   }
 
   public render(): JSX.Element {

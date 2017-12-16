@@ -53,10 +53,7 @@ export class InnerMain extends React.PureComponent<Props, State> {
   }
 
   public componentDidUpdate(_: Props): void {
-    // todo: check invalidate
-    if (this.props.charts.filter((c: DisplayChart) =>
-      c.dataSet === undefined &&
-      c.state === undefined).length > 0) {
+    if (this.props.charts.every((c: DisplayChart) => c.state === undefined)) {
       this.refresh();
     }
   }
@@ -130,8 +127,8 @@ const mapStateToProps: MapStateToProps<StateProps, OwnProps, AppState> = (state:
   const period = state.period;
   const charts: Array<DisplayChart> = selectDisplayChartList(state, period);
   const queryIds: Array<string> = selectQueryIds(state);
-  const refreshing: boolean = charts.filter(
-    (c: DisplayChart) => c.state === undefined || c.state.isRequesting).length > 0;
+  const refreshing: boolean = charts.some((c: DisplayChart) =>
+    c.state !== undefined && c.state.isRequesting);
   return {
     period,
     charts,
