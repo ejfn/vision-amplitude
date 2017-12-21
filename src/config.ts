@@ -44,6 +44,24 @@ const query2: EventsSegmentationQuery = {
   m: 'totals'
 };
 
+const query3: EventsSegmentationQuery = {
+  id: 'f1c8da06-c6a7-4b59-9ce8-c691df079156',
+  queryType: 'EventsSegmentation',
+  e: {
+    event_type: 'ce:Api Failed',
+    group_by: [
+      {
+        type: 'event',
+        value: 'apiType'
+      }, {
+        type: 'event',
+        value: 'azureLocation'
+      }
+    ]
+  },
+  m: 'totals'
+};
+
 const chart1: Chart = {
   title: 'By Type',
   queryId: query1.id,
@@ -72,13 +90,30 @@ const chart4: Chart = {
   colorScale: 'heatmap'
 };
 
+const chart5: Chart = {
+  title: 'By Error',
+  queryId: query3.id,
+  chartType: 'Line',
+  colorScale: 'red'
+};
+
+const chart6: Chart = {
+  title: 'By Error',
+  queryId: query3.id,
+  chartType: 'Pie',
+  colorScale: 'red'
+};
+
 export const QUERY_DEFINITIONS: Array<Query> = [
   query1,
-  query2
+  query2,
+  query3
 ];
 export const CHART_DEFINITIONS: Array<Chart> = [
   chart1,
   chart2,
   chart3,
-  chart4
+  chart4,
+  chart5,
+  chart6
 ];
