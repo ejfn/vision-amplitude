@@ -7,7 +7,7 @@
 /**
  * extra section in app.json
  */
-export interface ExtraConfig {
+export interface Config {
   amplitudeApiKey: string;
   amplitudeApiSecret: string;
 }

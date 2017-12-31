@@ -39,7 +39,7 @@ export class LineChart extends React.PureComponent<LineChartProps> {
     const height = width * 0.7;
     const padding = { top: 20, left: 50, right: 50, bottom: 50 };
     return (
-      <Svg>
+      <Svg width={width} height={height}>
         <AxisX
           width={width}
           height={height}

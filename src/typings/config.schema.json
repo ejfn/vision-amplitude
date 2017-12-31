@@ -1,9 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-06/schema#",
-  "title": "ExtraConfig",
+  "title": "Config",
   "description": "extra section in app.json",
-  "definitions": {
-  },
+  "definitions": {},
   "type": "object",
   "properties": {
     "amplitudeApiKey": {

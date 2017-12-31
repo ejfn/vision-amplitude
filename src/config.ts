@@ -5,13 +5,13 @@ import {
 } from './api/eventsSegmentation';
 import { Query } from './api/types';
 import { Chart } from './store';
-import { ExtraConfig } from './typings/extraConfig';
-import extraConfigSchema from './typings/extraConfig.schema.json';
+import { Config } from './typings/config';
+import configSchema from './typings/config.schema.json';
 import { schemaValidate } from './utils';
 
-schemaValidate(extraConfigSchema, Constants.manifest.extra, true);
+schemaValidate(configSchema, Constants.manifest.extra, true);
 
-export const EXTRA_CONFIG = Constants.manifest.extra as ExtraConfig;
+export const CONFIG = Constants.manifest.extra as Config;
 
 // todo: move this to app.json or elsewhere
 const query1: EventsSegmentationQuery = {

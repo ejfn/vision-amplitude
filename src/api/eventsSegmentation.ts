@@ -1,6 +1,6 @@
 import { encode } from 'base-64';
 
-import { EXTRA_CONFIG } from '../config';
+import { CONFIG } from '../config';
 import { QueryPeriod } from '../store';
 import { encodeQueryData, resolveRangeByPeriod } from '../utils/index';
 import {
@@ -50,7 +50,7 @@ export async function getEventsSegmentation(
     i
   });
   const headers: Headers = new Headers();
-  const basicAuth = encode(`${EXTRA_CONFIG.amplitudeApiKey}:${EXTRA_CONFIG.amplitudeApiSecret}`);
+  const basicAuth = encode(`${CONFIG.amplitudeApiKey}:${CONFIG.amplitudeApiSecret}`);
   headers.append('Authorization', `Basic ${basicAuth}`);
 
   const req: Request = new Request(
