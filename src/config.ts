@@ -1,15 +1,10 @@
 import { Constants } from 'expo';
-
 import {
   EventsSegmentationQuery
 } from './api/eventsSegmentation';
 import { Query } from './api/types';
 import { Chart } from './store';
 import { Config } from './typings/config';
-import configSchema from './typings/config.schema.json';
-import { schemaValidate } from './utils';
-
-schemaValidate(configSchema, Constants.manifest.extra, true);
 
 export const CONFIG = Constants.manifest.extra as Config;
 
@@ -35,6 +30,10 @@ const query2: EventsSegmentationQuery = {
   e: {
     event_type: 'ce:Api Succeeded',
     group_by: [
+      {
+        type: 'event',
+        value: 'apiType'
+      },
       {
         type: 'user',
         value: 'country'

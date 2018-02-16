@@ -67,7 +67,7 @@ export class LineChart extends React.PureComponent<LineChartProps> {
                 <VictoryLine
                   key={k}
                   name={k}
-                  interpolation="natural"
+                  interpolation="linear"
                   data={dataSet[k]}
                 />);
             })

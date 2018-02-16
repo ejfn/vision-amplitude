@@ -1,22 +1,6 @@
-import Ajv, { ValidateFunction } from 'ajv';
 import moment from 'moment';
-
 import { IterationOption } from '../api/types';
 import { QueryPeriod } from '../store';
-
-// tslint:disable-next-line:no-any
-export function schemaValidate(schema: ValidateFunction, data: any, raiseError: boolean = false): void {
-  const ajv = Ajv();
-  const valid = ajv.validate(schema, data);
-  if (!valid) {
-    // tslint:disable-next-line:no-console
-    console.log(ajv.errorsText());
-    if (raiseError) {
-      // tslint:disable-next-line:no-console
-      console.error(ajv.errorsText());
-    }
-  }
-}
 
 export function encodeQueryData(data: { [key: string]: string | number | undefined }): string {
   const ret: Array<string> = [];
