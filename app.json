@@ -4,7 +4,7 @@
     "description": "Amplitude charts for vision",
     "slug": "vision-amplitude",
     "privacy": "unlisted",
-    "sdkVersion": "24.0.0",
+    "sdkVersion": "27.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
     "primaryColor": "#cccccc",
@@ -25,8 +25,6 @@
       "supportsTablet": true
     },
     "extra": {
-      "amplitudeApiKey": "",
-      "amplitudeApiSecret": ""
     }
   }
 }

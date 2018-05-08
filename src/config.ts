@@ -89,19 +89,19 @@ const chart4: Chart = {
   colorScale: 'heatmap'
 };
 
-const chart5: Chart = {
-  title: 'By Error',
-  queryId: query3.id,
-  chartType: 'Line',
-  colorScale: 'red'
-};
+// const chart5: Chart = {
+//   title: 'By Error',
+//   queryId: query3.id,
+//   chartType: 'Line',
+//   colorScale: 'red'
+// };
 
-const chart6: Chart = {
-  title: 'By Error',
-  queryId: query3.id,
-  chartType: 'Pie',
-  colorScale: 'red'
-};
+// const chart6: Chart = {
+//   title: 'By Error',
+//   queryId: query3.id,
+//   chartType: 'Pie',
+//   colorScale: 'red'
+// };
 
 export const QUERY_DEFINITIONS: Array<Query> = [
   query1,
@@ -112,7 +112,7 @@ export const CHART_DEFINITIONS: Array<Chart> = [
   chart1,
   chart2,
   chart3,
-  chart4,
-  chart5,
-  chart6
+  chart4
+  // chart5,
+  // chart6
 ];

@@ -28,7 +28,7 @@ export class PieChart extends React.PureComponent<PieChartProps> {
     if (this.props.dataSet && this.props.dataSet.length > 0) {
       dataSet = this.props.dataSet;
       sum = dataSet.reduce((p: number, c: Pt) => p + c.y, 0);
-      labels = (o: Pt): string => `${Math.round(100 * o.y / sum)}%`;
+      labels = (o: Pt): string => `${Math.round(o.y * 100 / sum)}%`;
       legends = dataSet.slice(0, 6).map((p: Pt) => ({ name: `${p.x}: ${p.y}` }));
     }
     const innerRadius = (width * 0.6 / 2 - 20) / 2;
