@@ -3,6 +3,7 @@ import React from 'react';
 import { Dimensions } from 'react-native';
 import {
   ColorScalePropType,
+  VictoryContainer,
   VictoryLegend,
   VictoryPie,
   VictoryTheme
@@ -34,7 +35,7 @@ export class PieChart extends React.PureComponent<PieChartProps> {
     const innerRadius = (width * 0.6 / 2 - 20) / 2;
     const height = width * 0.6;
     return (
-      <Svg width={width} height={height}>
+      <VictoryContainer width={width} height={height}>
         <VictoryLegend
           theme={VictoryTheme.material}
           colorScale={this.props.colorScale}
@@ -57,7 +58,7 @@ export class PieChart extends React.PureComponent<PieChartProps> {
           // tslint:disable-next-line:react-this-binding-issue
           labels={labels}
         />
-      </Svg>
+      </VictoryContainer>
     );
   }
 }

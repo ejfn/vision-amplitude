@@ -4,9 +4,11 @@ import { Dimensions } from 'react-native';
 import {
   ColorScalePropType,
   DomainPropType,
+  VictoryContainer,
   VictoryGroup,
   VictoryLine,
-  VictoryTheme
+  VictoryTheme,
+  VictoryChart
 } from 'victory-native';
 import { Pt } from '../typings/victory';
 import { AxisX } from './AxisX';
@@ -39,7 +41,7 @@ export class LineChart extends React.PureComponent<LineChartProps> {
     const height = width * 0.7;
     const padding = { top: 20, left: 50, right: 50, bottom: 50 };
     return (
-      <Svg width={width} height={height}>
+      <VictoryContainer width={width} height={height}>
         <AxisX
           width={width}
           height={height}
@@ -73,7 +75,7 @@ export class LineChart extends React.PureComponent<LineChartProps> {
             })
           }
         </VictoryGroup>
-      </Svg>
+      </VictoryContainer>
     );
   }
 }

@@ -1,13 +1,14 @@
 import React from 'react';
 import {
   Dimensions,
+  Platform,
   RefreshControl,
   SafeAreaView,
   ScrollView,
-  SegmentedControlIOS,
   StyleSheet,
   View
 } from 'react-native';
+import SegmentedControlTab from 'react-native-segmented-control-tab';
 import { connect, MapStateToProps } from 'react-redux';
 import { updateQueryPeriod } from '../actions/period';
 import { invalidateQueryDataList, InvalidateQueryDataListPayload } from '../actions/queryData';
@@ -90,7 +91,8 @@ export class InnerMain extends React.PureComponent<Props, State> {
     }
   }
 
-  private onPeriodChanged = (v: QueryPeriod): void => {
+  private onPeriodChanged = (i: number): void => {
+    const v = PERIODS[i];
     this.props.updateQueryPeriod(v);
   }
 
@@ -99,11 +101,11 @@ export class InnerMain extends React.PureComponent<Props, State> {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.top}>
-          <SegmentedControlIOS
-            style={styles.periods}
+          <SegmentedControlTab
+            tabsContainerStyle={styles.periods}
             values={PERIODS}
             selectedIndex={periodIndex}
-            onValueChange={this.onPeriodChanged}
+            onTabPress={this.onPeriodChanged}
           />
         </View>
         <ScrollView
@@ -154,7 +156,8 @@ const styles = StyleSheet.create({
   top: {
     justifyContent: 'flex-start',
     alignItems: 'center',
-    padding: 10
+    padding: 10,
+    marginTop: Platform.select({ ios: undefined, android: 40 })
   },
   scrollview: {
     alignItems: 'center'
