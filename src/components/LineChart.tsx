@@ -1,4 +1,3 @@
-import { Svg } from 'expo';
 import React from 'react';
 import { Dimensions } from 'react-native';
 import {
@@ -7,8 +6,7 @@ import {
   VictoryContainer,
   VictoryGroup,
   VictoryLine,
-  VictoryTheme,
-  VictoryChart
+  VictoryTheme
 } from 'victory-native';
 import { Pt } from '../typings/victory';
 import { AxisX } from './AxisX';
