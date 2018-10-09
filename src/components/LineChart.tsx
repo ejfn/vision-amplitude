@@ -53,6 +53,7 @@ export class LineChart extends React.PureComponent<LineChartProps> {
           domain={domain}
         />
         <VictoryGroup
+          standalone={false}
           theme={VictoryTheme.material}
           colorScale={this.props.colorScale}
           domain={domain}

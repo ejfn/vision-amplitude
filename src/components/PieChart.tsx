@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import {
   ColorScalePropType,
   VictoryContainer,
@@ -34,30 +34,34 @@ export class PieChart extends React.PureComponent<PieChartProps> {
     const innerRadius = (width * 0.6 / 2 - 20) / 2;
     const height = width * 0.6;
     return (
-      <VictoryContainer width={width} height={height}>
-        <VictoryLegend
-          theme={VictoryTheme.material}
-          colorScale={this.props.colorScale}
-          orientation={'vertical'}
-          x={20}
-          y={20}
-          data={legends}
-          standalone={false}
-        />
-        <VictoryPie
-          theme={VictoryTheme.material}
-          colorScale={this.props.colorScale}
-          width={width}
-          height={height}
-          innerRadius={innerRadius}
-          labelRadius={innerRadius * 4 / 3}
-          padding={{ left: width * 0.4, right: 20, top: 20, bottom: 20 }}
-          padAngle={2}
-          data={dataSet}
-          // tslint:disable-next-line:react-this-binding-issue
-          labels={labels}
-        />
-      </VictoryContainer>
+      <View>
+        <VictoryContainer width={width} height={height}>
+          <VictoryLegend
+            theme={VictoryTheme.material}
+            colorScale={this.props.colorScale}
+            orientation={'vertical'}
+            x={20}
+            y={20}
+            data={legends}
+            standalone={false}
+          />
+          <VictoryPie
+            standalone={false}
+            theme={VictoryTheme.material}
+            colorScale={this.props.colorScale}
+            width={width}
+            height={height}
+            innerRadius={innerRadius}
+            labelRadius={innerRadius * 4 / 3}
+            padding={{ left: width * 0.4, right: 20, top: 20, bottom: 20 }}
+            padAngle={2}
+            data={dataSet}
+            // tslint:disable-next-line:react-this-binding-issue
+            labels={labels}
+          />
+        </VictoryContainer>
+      </View>
+
     );
   }
 }
