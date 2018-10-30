@@ -73,18 +73,20 @@ export class InnerMain extends React.PureComponent<Props, State> {
     switch (chartType) {
       case 'Line':
         return (
-          <LineChart
-            key={i}
-            colorScale={colorScale}
-            dataSet={dataSet as LineChartDataSet}
-          />
+          <View pointerEvents="none" key={i}>
+            <LineChart
+              colorScale={colorScale}
+              dataSet={dataSet as LineChartDataSet}
+            />
+          </View>
         );
       case 'Pie':
         return (
-          <PieChart
-            key={i}
-            colorScale={colorScale}
-            dataSet={dataSet as PieChartDataSet} />
+          <View pointerEvents="none" key={i}>
+            <PieChart
+              colorScale={colorScale}
+              dataSet={dataSet as PieChartDataSet} />
+          </View>
         );
       default:
         return <View />;
@@ -99,7 +101,7 @@ export class InnerMain extends React.PureComponent<Props, State> {
   public render(): JSX.Element {
     const periodIndex = PERIODS.indexOf(this.props.period);
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container} >
         <View style={styles.top}>
           <SegmentedControlTab
             tabsContainerStyle={styles.periods}
@@ -109,7 +111,7 @@ export class InnerMain extends React.PureComponent<Props, State> {
           />
         </View>
         <ScrollView
-          contentContainerStyle={styles.scrollview}
+          contentContainerStyle={styles.scrollviewContent}
           refreshControl={
             <RefreshControl
               refreshing={this.props.refreshing}
@@ -159,7 +161,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: Platform.select({ ios: undefined, android: 40 })
   },
-  scrollview: {
+  scrollviewContent: {
     alignItems: 'center'
   },
   periods: {
