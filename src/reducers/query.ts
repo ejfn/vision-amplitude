@@ -10,24 +10,22 @@ export function queryReducer(
     typeof actions.updateQuery.shape
 ): ReduxIndex<Query> {
   switch (action.type) {
-    case actions.updateQuery.type:
-      {
-        return {
-          ...state,
-          [action.payload.id]: action.payload
-        };
-      }
-    case actions.updateQueryList.type:
-      {
-        return action.payload.reduce(
-          (p: ReduxIndex<Query>, q: Query) => {
-            return {
-              ...p,
-              [q.id]: q
-            };
-          },
-          state);
-      }
+    case actions.updateQuery.type: {
+      return {
+        ...state,
+        [action.payload.id]: action.payload
+      };
+    }
+    case actions.updateQueryList.type: {
+      return action.payload.reduce(
+        (p: ReduxIndex<Query>, q: Query) => {
+          return {
+            ...p,
+            [q.id]: q
+          };
+        },
+        state);
+    }
     default:
       return state;
   }

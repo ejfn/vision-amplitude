@@ -3,7 +3,7 @@
     "name": "vision-amplitude",
     "description": "Amplitude charts for vision",
     "slug": "vision-amplitude",
-    "sdkVersion": "30.0.0",
+    "sdkVersion": "32.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
     "primaryColor": "#cccccc",

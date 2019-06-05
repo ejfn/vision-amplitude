@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Dimensions,
   Platform,
-  RefreshControl,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -59,7 +58,7 @@ export class InnerMain extends React.PureComponent<Props, State> {
     }
   }
 
-  private refresh = (): void => {
+  private readonly refresh = (): void => {
     const payload: InvalidateQueryDataListPayload = {
       period: this.props.period,
       queryIds: this.props.queryIds
@@ -67,7 +66,7 @@ export class InnerMain extends React.PureComponent<Props, State> {
     this.props.invalidateQueryDataList(payload);
   }
 
-  private renderChart = (displayChart: DisplayChart, i: number): JSX.Element => {
+  private readonly renderChart = (displayChart: DisplayChart, i: number): JSX.Element => {
     const { chart, dataSet } = displayChart;
     const { chartType, colorScale } = chart;
     switch (chartType) {
@@ -93,7 +92,7 @@ export class InnerMain extends React.PureComponent<Props, State> {
     }
   }
 
-  private onPeriodChanged = (i: number): void => {
+  private readonly onPeriodChanged = (i: number): void => {
     const v = PERIODS[i];
     this.props.updateQueryPeriod(v);
   }
@@ -112,12 +111,12 @@ export class InnerMain extends React.PureComponent<Props, State> {
         </View>
         <ScrollView
           contentContainerStyle={styles.scrollviewContent}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.props.refreshing}
-              onRefresh={this.refresh}
-            />
-          }>
+        // refreshControl={
+        //   <RefreshControl
+        //     refreshing={this.props.refreshing}
+        //     onRefresh={this.refresh}
+        //   />}
+        >
           {
             this.props.charts.map((c: DisplayChart, i: number) => this.renderChart(c, i))
           }

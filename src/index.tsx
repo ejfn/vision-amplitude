@@ -53,7 +53,7 @@ export class App extends React.PureComponent<Props, State> {
       </Provider>
     );
   }
-  private finishLoading = () => {
+  private readonly finishLoading = () => {
     this.setState((state: State) => {
       return {
         ...state,
@@ -62,7 +62,7 @@ export class App extends React.PureComponent<Props, State> {
     });
   }
 
-  private cacheResourcesAsync = async () => {
+  private readonly cacheResourcesAsync = async () => {
     // tslint:disable:no-require-imports no-floating-promises
 
     // tslint:enable:no-require-imports no-floating-promises

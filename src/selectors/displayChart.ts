@@ -32,31 +32,29 @@ function transformChartData(queryData: QueryData | undefined, chartType: ChartTy
     const data = queryData.data;
     const labels = data.seriesLabels.map((i: Array<string>) => i[1]);
     switch (chartType) {
-      case 'Line':
-        {
-          const chartData: Record<string, Array<Pt>> = {};
-          return labels.reduce(
-            (p: Record<string, Array<Pt>>, c: string, i: number) => {
-              p[c] = data.xValues.map((x: string, j: number) => {
-                const y = data.series[i][j];
-                return { x, y };
-              });
-              return p;
-            },
-            chartData);
-        }
-      case 'Pie':
-        {
-          const chartData: Array<Pt> = [];
-          labels.reduce(
-            (p: Array<Pt>, x: string, i: number) => {
-              const y = data.seriesCollapsed[i][0].value;
-              p.push({ x, y });
-              return p;
-            },
-            chartData);
-          return chartData;
-        }
+      case 'Line': {
+        const chartData: Record<string, Array<Pt>> = {};
+        return labels.reduce(
+          (p: Record<string, Array<Pt>>, c: string, i: number) => {
+            p[c] = data.xValues.map((x: string, j: number) => {
+              const y = data.series[i][j];
+              return { x, y };
+            });
+            return p;
+          },
+          chartData);
+      }
+      case 'Pie': {
+        const chartData: Array<Pt> = [];
+        labels.reduce(
+          (p: Array<Pt>, x: string, i: number) => {
+            const y = data.seriesCollapsed[i][0].value;
+            p.push({ x, y });
+            return p;
+          },
+          chartData);
+        return chartData;
+      }
       default:
         return undefined;
     }

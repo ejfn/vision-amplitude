@@ -28,11 +28,11 @@ export interface EventsSegmentationQueryData extends QueryData {
 }
 
 export function isEventsSegmentationQuery(o: Query | undefined): o is EventsSegmentationQuery {
-  return o != null && typeof o === 'object' && o.queryType === EVENTS_SEGMENTATION_QUERY_TYPE;
+  return o !== undefined && typeof o === 'object' && o.queryType === EVENTS_SEGMENTATION_QUERY_TYPE;
 }
 
 export function isEventsSegmentationQueryData(o: QueryData | undefined): o is EventsSegmentationQueryData {
-  return o != null && typeof o === 'object' && o.queryType === EVENTS_SEGMENTATION_QUERY_TYPE;
+  return o !== undefined && typeof o === 'object' && o.queryType === EVENTS_SEGMENTATION_QUERY_TYPE;
 }
 
 export async function getEventsSegmentation(
@@ -42,8 +42,8 @@ export async function getEventsSegmentation(
   const url: string = 'https://amplitude.com/api/2/events/segmentation';
   const { start, end, i } = resolveRangeByPeriod(period);
   const query: string = encodeQueryData({
-    e: JSON.stringify(chart.e, null, ''),
-    e2: chart.e2 !== undefined ? JSON.stringify(chart.e2, null, '') : undefined,
+    e: JSON.stringify(chart.e, undefined, ''),
+    e2: chart.e2 !== undefined ? JSON.stringify(chart.e2, undefined, '') : undefined,
     m: chart.m,
     start,
     end,

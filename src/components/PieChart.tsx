@@ -29,10 +29,12 @@ export class PieChart extends React.PureComponent<PieChartProps> {
       dataSet = this.props.dataSet;
       sum = dataSet.reduce((p: number, c: Pt) => p + c.y, 0);
       labels = (o: Pt): string => `${Math.round(o.y * 100 / sum)}%`;
-      legends = dataSet.slice(0, 6).map((p: Pt) => ({ name: `${p.x}: ${p.y}` }));
+      legends = dataSet.slice(0, 6)
+        .map((p: Pt) => ({ name: `${p.x}: ${p.y}` }));
     }
     const innerRadius = (width * 0.6 / 2 - 20) / 2;
     const height = width * 0.6;
+    const labelRadius = innerRadius * 4 / 3;
     return (
       <View>
         <VictoryContainer width={width} height={height}>
@@ -52,7 +54,7 @@ export class PieChart extends React.PureComponent<PieChartProps> {
             width={width}
             height={height}
             innerRadius={innerRadius}
-            labelRadius={innerRadius * 4 / 3}
+            labelRadius={labelRadius}
             padding={{ left: width * 0.4, right: 20, top: 20, bottom: 20 }}
             padAngle={2}
             data={dataSet}

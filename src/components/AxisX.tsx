@@ -17,18 +17,21 @@ export interface LegendProps {
 
 export class AxisX extends React.PureComponent<LegendProps> {
 
-  private formatLabel = (date: string, totalDays: number): string => {
+  private readonly formatLabel = (date: string, totalDays: number): string => {
     if (totalDays < 42) {
-      return moment(date).format('D');
+      return moment(date)
+        .format('D');
     }
-    return moment(date).format('D-MMM');
+    return moment(date)
+      .format('D-MMM');
   }
 
   public render(): JSX.Element {
     let tickValues;
     let tickFormat;
     if (this.props.labels.length > 0) {
-      const totalDays = moment(this.props.labels[this.props.labels.length - 1]).diff(moment(this.props.labels[0]), 'days');
+      const totalDays = moment(this.props.labels[this.props.labels.length - 1])
+        .diff(moment(this.props.labels[0]), 'days');
       tickValues = this.props.labels.map((_: string, i: number) => i);
       tickFormat = this.props.labels.map((s: string) => this.formatLabel(s, totalDays));
     }

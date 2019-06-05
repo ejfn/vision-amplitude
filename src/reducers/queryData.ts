@@ -9,18 +9,17 @@ export function queryDataReducer(
     typeof actions.updateQueryData.shape
 ): Record<QueryPeriod, ReduxIndex<QueryData>> {
   switch (action.type) {
-    case actions.updateQueryData.type:
-      {
-        const { period, queryId, queryData } = action.payload;
-        const periodData = {
-          ...state[period],
-          [queryId]: queryData
-        };
-        return {
-          ...state,
-          [period]: periodData
-        };
-      }
+    case actions.updateQueryData.type: {
+      const { period, queryId, queryData } = action.payload;
+      const periodData = {
+        ...state[period],
+        [queryId]: queryData
+      };
+      return {
+        ...state,
+        [period]: periodData
+      };
+    }
     default:
       return state;
   }
